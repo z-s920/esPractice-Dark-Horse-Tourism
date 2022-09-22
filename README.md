@@ -8,6 +8,12 @@ Use the front and back end calls of a travel page to implement some query operat
   2.1 运行本地虚拟机，部署单点es
   ```
   systemctl start docker //打开docker
+  docker network create es-net //创建一个名为es-net的网络
+  
+//对上传的压缩包进行加载
+docker load -i es.tar 
+docker load -i kibana.tar
+
   docker run -d \   //-d：后台运行
 	--name es \   // 顾名思义  起个名字给容器
     -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \   // -e 环境变量的配置
@@ -20,7 +26,7 @@ Use the front and back end calls of a travel page to implement some query operat
     -p 9300:9300 \
 elasticsearch:7.12.1   //镜像名称
 ```
-  2.2 部署kibana： 可以给我们提供一个elasticsearch的可视化界面，便于我们学习。
+  2.2 部署kibana： 可以给我们提供一个elasticsearch的可视化界面，便于我们学习，可以很好的编写DSL语句。
   ```
   docker run -d \
 --name kibana \
@@ -84,6 +90,7 @@ docker logs -f es
 ### Details
 
  可通过以下作者写的博客详细了解基础知识。
+ 上述文件中的es.tar kibana.tar文件较大，上传不了，可以在第一个博客中置顶的下载链接中下载
 1. https://blog.csdn.net/m0_62025000/article/details/126865310?spm=1001.2014.3001.5501
 2. https://blog.csdn.net/m0_62025000/article/details/126850080?spm=1001.2014.3001.5501
 3. https://blog.csdn.net/m0_62025000/article/details/126902977?spm=1001.2014.3001.5501
